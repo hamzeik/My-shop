@@ -1,0 +1,83 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Online Shop</title>
+  <style>
+    body { font-family: Arial; margin:0; background:#f4f4f4; }
+    header { background:#222; color:white; padding:15px; text-align:center; }
+    .products { display:flex; flex-wrap:wrap; justify-content:center; padding:20px; }
+    .card {
+      background:white;
+      width:220px;
+      margin:10px;
+      padding:15px;
+      border-radius:10px;
+      box-shadow:0 2px 5px rgba(0,0,0,0.2);
+      text-align:center;
+    }
+    .card img { width:100%; border-radius:10px; }
+    button {
+      background:#28a745;
+      color:white;
+      border:none;
+      padding:10px;
+      margin-top:10px;
+      cursor:pointer;
+      border-radius:5px;
+    }
+    button:hover { background:#218838; }
+    #cart {
+      position:fixed;
+      right:10px;
+      top:10px;
+      background:white;
+      padding:10px;
+      border-radius:10px;
+      box-shadow:0 2px 5px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body><header>
+  <h1>My Online Store</h1>
+  <p>Order via WhatsApp</p>
+</header><div id="cart">
+  <h4>Cart 🛒</h4>
+  <ul id="cartItems"></ul>
+  <button onclick="orderWhatsApp()">Order Now</button>
+</div><div class="products">  <div class="card">
+    <img src="https://via.placeholder.com/200" alt="Product">
+    <h3>Shirt</h3>
+    <p>Rs. 1000</p>
+    <button onclick="addToCart('Shirt')">Add to Cart</button>
+  </div>  <div class="card">
+    <img src="https://via.placeholder.com/200" alt="Product">
+    <h3>Shoes</h3>
+    <p>Rs. 2000</p>
+    <button onclick="addToCart('Shoes')">Add to Cart</button>
+  </div></div><script>
+let cart = [];
+
+function addToCart(product) {
+  cart.push(product);
+  displayCart();
+}
+
+function displayCart() {
+  let list = document.getElementById('cartItems');
+  list.innerHTML = '';
+  cart.forEach(item => {
+    let li = document.createElement('li');
+    li.textContent = item;
+    list.appendChild(li);
+  });
+}
+
+function orderWhatsApp() {
+  let message = 'I want to order: ' + cart.join(', ');
+  let phone = '923XXXXXXXXX'; // apna number yahan likho
+  let url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+  window.open(url, '_blank');
+}
+</script></body>
+</html>
